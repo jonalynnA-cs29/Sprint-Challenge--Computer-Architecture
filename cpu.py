@@ -1,4 +1,4 @@
-#CPU functionality.#
+"""CPU functionality"""
 
 import sys
 #www---www------------<<-=<<   ALU Operations  >>= ->>------------www---www#
@@ -50,7 +50,7 @@ SP = 7  # SP assign to be use R7 per spec
 
 
 class CPU:
-    #Main CPU class.#
+    """Main CPU class"""
 
     #www---www------------<<-=<<   Constructor   >>= ->>------------www---www#
 
@@ -158,10 +158,10 @@ class CPU:
     def ram_write(self, value, address):  # Accept a value to write and the address to write to
         self.ram[address] = value
 
-#www---www------------<<-=<<   Load Methods   >>= ->>------------www---www#
+# www---www------------<<-=<<   Load Methods   >>= ->>------------www---www
 
     def load(self):
-        #Load a program into memory.#
+        """Load a program into memory"""
         address = 0
         with open(sys.argv[1]) as f:
             for line in f:
@@ -175,7 +175,8 @@ class CPU:
                 address += 1
 
     def alu(self, operation, reg_a, reg_b):
-        #ALU operations.#
+        """ALU operations"""
+
         if operation == "ADD":
             self.reg[reg_a] += self.reg[reg_b]
         elif operation == "MUL":
@@ -191,10 +192,7 @@ class CPU:
             raise Exception("Unsupported ALU operation")
 
     def trace(self):
-        #
-        Handy function to print out the CPU state. You might want to call this
-        from run() if you need help debugging.
-        #
+        """ Handy function to print out the CPU state. You might want to call this from run() if you need help debugging."""
 
         print(f"TRACE: %02X | %02X %02X %02X |" % (
             self.pc,
@@ -211,7 +209,7 @@ class CPU:
         print()
 
     def run(self):
-        #Run the CPU.#
+        """Run the CPU"""
         while self.running:
             IR = self.ram_read(self.pc)
             operand_a = self.ram_read(self.pc + 1)
